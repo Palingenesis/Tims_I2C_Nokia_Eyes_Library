@@ -1,0 +1,55 @@
+# Syntax Coloring Tims_I2C_Nokia_Eyes
+
+# Datatypes (KEYWORD1)
+
+NokiaEyes	KEYWORD1
+
+# Methods and Functions (KEYWORD2)
+
+Tims_I2C_Nokia_Eyes	KEYWORD2
+AUX	KEYWORD2
+SK9822_EyeColour	KEYWORD2
+write	KEYWORD2
+TextInverted	KEYWORD2
+PCD8544_Clear	KEYWORD2
+PCD8544_GoToXY	KEYWORD2
+PCD8544_Begin	KEYWORD2
+PCD8544_UpdateDisplay	KEYWORD2
+PCD8544_ChangeContrast	KEYWORD2
+PCD8544_InvertDisplay	KEYWORD2
+Buffer_UseDefault	KEYWORD2
+Buffer_InvertDisplay	KEYWORD2
+Buffer_ChangePixel	KEYWORD2
+Buffer_DrawLine	KEYWORD2
+Buffer_DrawVerticalLine	KEYWORD2
+Buffer_DrawHorizontalLine	KEYWORD2
+Buffer_DrawRect	KEYWORD2
+Buffer_DrawFilledRect	KEYWORD2
+Buffer_DrawRoundRect	KEYWORD2
+Buffer_DrawFilledRectRC	KEYWORD2
+Buffer_DrawCircle	KEYWORD2
+Buffer_DrawRC	KEYWORD2
+Buffer_DrawFilledRC	KEYWORD2
+Buffer_DrawCharecter	KEYWORD2
+Buffer_Print	KEYWORD2
+Buffer_DrawSprite_F	KEYWORD2
+Buffer_DrawSprite_S	KEYWORD2
+Buffer_ToBuffer	KEYWORD2
+Buffer_FillScreen	KEYWORD2
+
+# Constants (LITERAL1)
+
+Buffer01	LITERAL1
+Buffer02	LITERAL1
+BasicChar5x8	LITERAL1
+Numbers_18x24	LITERAL1
+Iris_32x30	LITERAL1
+WHITE	LITERAL1
+BLACK	LITERAL1
+PCD8544_WIDTH	LITERAL1
+PCD8544_HEIGHT	LITERAL1
+BOTH	LITERAL1
+LEFT	LITERAL1
+RIGHT	LITERAL1
+PCD8544_CONTRAST_DEFAULT	LITERAL1
+
