@@ -2,7 +2,6 @@
 An Arduino Library for controlling my TIM-01 Robot Eyes Module
 <img src="https://github.com/Palingenesis/Tims_I2C_Nokia_Eyes_Library/blob/main/Images/TIM-01_Eyes_Front_Github.png" alt="Front">
 
-
 	The library is ported from:
 	Part of TIM-01 Robot Project.
 
@@ -27,44 +26,42 @@ An Arduino Library for controlling my TIM-01 Robot Eyes Module
 	More projects here: [Tim's Blog Place](https://timsblogplace.blogspot.com/2018/07/blog-post.html)
 	
 
-	Nokia Display LPH7366: 84x48
-            +--------------------------+
-            |     1 2 3 4 5 6 7 8 9    |	PCD8544 Driver Pins:
-            |     # # # # # # # # #    |      1 .. VDD  = 3.3v (up to 7.4 mA)
-            |  ===#=#=#=#=#=#=#=#=#==  |      2 .. SCLK = Clock.
-            +--======================--+      3 .. SDIN = Serial In.
-            |                          |      4 .. D/C  = Data / Command.
-            |                          |      5 .. SCE  = (CS) Cable select (active low).
-            |        rear view         |      6 .. Osc  = Oscillator, attach to 3.3v rail.
-            |   connector is visible   |      7 .. GND  = Ground.
-            |                          |      8 .. Vout = LCD supply voltage (from driver internal dc/dc converter).
-            |  Display Name LPH7366    |      9 .. RES  = Reset (active low).
+	Nokia Display LPH7366: 84x48            PCD8544 Driver Pins:
+            +--------------------------+      1 .. VDD  = 3.3v (up to 7.4 mA)
+            |     1 2 3 4 5 6 7 8 9    |      2 .. SCLK = Clock.
+            |     # # # # # # # # #    |      3 .. SDIN = Serial In.
+            |  ===#=#=#=#=#=#=#=#=#==  |      4 .. D/C  = Data / Command.
+            +--======================--+      5 .. SCE  = (CS) Cable select (active low).
+            |                          |      6 .. Osc  = Oscillator, attach to 3.3v rail.
+            |                          |      7 .. GND  = Ground.
+            |        rear view         |      8 .. Vout = LCD supply voltage (from driver internal dc/dc converter).
+            |   connector is visible   |      9 .. RES  = Reset (active low).
+            |                          |    
+            |  Display Name LPH7366    |    
             |                          |
             +--------------------------+
 
-
-	PCF8574 Module:
-            +---------------------------------------+	PCF8574 Pins:
-            |   1 2 3 4 5 6 7 8 9                   |		I2C: VCC, Ground, SDA, SCL.
-            |                                       |	Pins:
-            | VCC                               VCC |     1 .. P0  = SDIN
-            | GND                               GND |     2 .. P1  = SCLK   (PCD8544) / CKI (SK9822)
-            | SDA        Component Side         SDA |     3 .. P2  = D/C
-            | SCL                               SCL |     4 .. P3  = RES
-            |                                       |     5 .. P4  = SCE    (CS) Cable select Left  Nokia Display.
-            +---------------------------------------+     6 .. P5  = SCE    (CS) Cable select Right Nokia Display.
-                                                          7 .. P6  = SDI    (SK9822)
-                                                          8 .. P7  = AUX
-                                                          9 .. INT = PCF8574 interupt.
-	SK9822 Intelegent RGB LED:
-            +-----------------------+	SK9822 Pins:
-            |                       |     Vcc = 5v Power.
-            | VCC               GND |     CKO = Clock Out.	
-            | CKO   Top View    SCI |     SDO = Data  Out.	
-            | SDO               SDI |     SDI = Data  In.	
-            |                       |     SCI = Clock In.	
-            +-----------------------+     GND = Ground, Negative Power.	
-
+	PCF8574 Module:                                      Input Pins:
+            +---------------------------------------+      I2C: VCC, Ground, SDA, SCL.	
+            |   1 2 3 4 5 6 7 8 9                   |    Output Pins:	
+            |                                       |      1 .. P0  = SDIN	
+            | VCC                               VCC |      2 .. P1  = SCLK   (PCD8544) / CKI (SK9822)  
+            | GND                               GND |      3 .. P2  = D/C  
+            | SDA        Component Side         SDA |      4 .. P3  = RES  
+            | SCL                               SCL |      5 .. P4  = SCE    (CS) Cable select Left  Nokia Display.  
+            |                                       |      6 .. P5  = SCE    (CS) Cable select Right Nokia Display.  
+            +---------------------------------------+      7 .. P6  = SDI    (SK9822)  
+                                                           8 .. P7  = AUX  
+                                                           9 .. INT = PCF8574 interupt.  
+                                                        
+	SK9822 Intelegent RGB LED:           Pins:
+            +-----------------------+      Vcc = 5v Power.
+            |                       |      CKO = Clock Out.	
+            | VCC               GND |      SDO = Data  Out.	
+            | CKO   Top View    SCI |      SDI = Data  In.	
+            | SDO               SDI |      SCI = Clock In.	
+            |                       |      GND = Ground, Negative Power.	
+            +-----------------------+
 
 
 	There are several types of command in my library.
