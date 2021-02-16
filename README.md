@@ -7,7 +7,7 @@ An Arduino Library for controlling my TIM-01 Robot Eyes Module
 	Part of TIM-01 Robot Project.
 
 	It is for an eye module I have designed for my robot.
-	Details are here: [TIM-01 Eyes](https://robot-tim01.blogspot.com/2021/02/eyes.html)
+	Details are here: <a href="https://robot-tim01.blogspot.com/2021/02/eyes.html">TIM-01 Eyes</a>
 	
 	By Tim Jackson
 	Use Freely, Just give me credit where due :)
