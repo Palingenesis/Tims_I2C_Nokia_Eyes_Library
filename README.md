@@ -47,27 +47,30 @@ An Arduino Library for controlling my TIM-01 Robot Eyes Module
 			+---------------------------------------+	PCF8574 Pins:
 			|   1 2 3 4 5 6 7 8 9                   |		I2C: VCC, Ground, SDA, SCL.
 			|                                       |	Pins:
-			| VCC                               VCC |		1	P0	= SDIN
-			| GND                               GND |		2	P1	= SCLK	(PCD8544) / CKI (SK9822)
-			| SDA        Component Side         SDA |		3	P2	= D/C
-			| SCL                               SCL |		4	P3	= RES
-			|                                       |		5	P4	= SCE	(CS) Cable select Left  Nokia Display.
-			+---------------------------------------+		6	P5	= SCE	(CS) Cable select Right Nokia Display.
-															7	P6	= SDI	(SK9822)
-															8	P7	= AUX
-															9	INT = PCF8574 interupt.
+			| VCC                               VCC |     1 P0  = SDIN
+			| GND                               GND |     2 P1  = SCLK   (PCD8544) / CKI (SK9822)
+			| SDA        Component Side         SDA |     3 P2  = D/C
+			| SCL                               SCL |     4 P3  = RES
+			|                                       |     5 P4  = SCE    (CS) Cable select Left  Nokia Display.
+			+---------------------------------------+     6 P5  = SCE    (CS) Cable select Right Nokia Display.
+                                                          7 P6  = SDI    (SK9822)
+                                                          8 P7  = AUX
+                                                          9 INT = PCF8574 interupt.
 	SK9822 Intelegent RGB LED:
 			+-----------------------+	SK9822 Pins:
-			|                       |		Vcc	=	5v Power.
-			| VCC               GND |		CKO	=	Clock Out.	
-			| CKO   Top View    SCI |		SDO	=	Data  Out.	
-			| SDO               SDI |		SDI	=	Data  In.	
-			|                       |		SCI	=	Clock In.	
-			+-----------------------+		GND	=	Ground, Negative Power.	
+			|                       |     Vcc = 5v Power.
+			| VCC               GND |     CKO = Clock Out.	
+			| CKO   Top View    SCI |     SDO = Data  Out.	
+			| SDO               SDI |     SDI = Data  In.	
+			|                       |     SCI = Clock In.	
+			+-----------------------+     GND = Ground, Negative Power.	
 
 
 
 	There are several types of command in my library.
-		If starts with Buffer_??,  this alters the buffer and will require the command PCD8544_UpdateDisplay to display any changes to the buffer.
-		If starts with PCD8544_??, this is written direct to the displays.
-		The Print command uses the Arduino Print library. It writes direct to the screens, the text position will need to be set first.
+		If starts with Buffer_??,
+			this alters the buffer and will require the command PCD8544_UpdateDisplay to display any changes to the buffer.
+		If starts with PCD8544_??,
+			this is written direct to the displays.
+		The Print command uses the Arduino Print library.
+			It writes direct to the screens, the text position will need to be set first.
