@@ -7,7 +7,7 @@ An Arduino Library for controlling my TIM-01 Robot Eyes Module
 	Part of TIM-01 Robot Project.
 
 	It is for an eye module I have designed for my robot.
-	Details are here: https://robot-tim01.blogspot.com/2021/02/eyes.html
+	Details are here: <a href="https://robot-tim01.blogspot.com/2021/02/eyes.html">TIM-01 (Eyes)</a>
 
 	By Tim Jackson
 	Use Freely, Just give me credit where due :)
@@ -22,9 +22,9 @@ An Arduino Library for controlling my TIM-01 Robot Eyes Module
 	To give backlighting to the eyes I am using two SK9822 Intelegent RGB LEDs.
 
 	My work is always, work in progress.
-	Details of my project here: https://robot-tim01.blogspot.com/2020/04/robot-tim-01.html
+	Details of my project here: <a href="https://robot-tim01.blogspot.com/2020/04/robot-tim-01.html">TIM-01</a>
 
-	More projects here: https://timsblogplace.blogspot.com/2018/07/blog-post.html
+	More projects here: <a href="https://timsblogplace.blogspot.com/2018/07/blog-post.html">Tim's Blog Place</a>
 
 
 	Nokia Display LPH7366: 84x48
