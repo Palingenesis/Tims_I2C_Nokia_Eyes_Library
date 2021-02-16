@@ -7,7 +7,7 @@ An Arduino Library for controlling my TIM-01 Robot Eyes Module
 	Part of TIM-01 Robot Project.
 
 	It is for an eye module I have designed for my robot.
-	Details are here: https://robot-tim01.blogspot.com/2021/02/eyes.html
+	Details are here: [TIM-01 (Eyes)](https://robot-tim01.blogspot.com/2021/02/eyes.html)
 	
 	By Tim Jackson
 	Use Freely, Just give me credit where due :)
@@ -22,9 +22,9 @@ An Arduino Library for controlling my TIM-01 Robot Eyes Module
 	To give backlighting to the eyes I am using two SK9822 Intelegent RGB LEDs.
 
 	My work is always, work in progress.
-	Details of my project here: https://robot-tim01.blogspot.com/2020/04/robot-tim-01.html
+	Details of my project here: [TIM-01](https://robot-tim01.blogspot.com/2020/04/robot-tim-01.html)
 	
-	More projects here: https://timsblogplace.blogspot.com/2018/07/blog-post.html
+	More projects here: [Tim's Blog Place](https://timsblogplace.blogspot.com/2018/07/blog-post.html)
 	
 
 	Nokia Display LPH7366: 84x48
@@ -44,25 +44,25 @@ An Arduino Library for controlling my TIM-01 Robot Eyes Module
 
 
 	PCF8574 Module:
-			+----------------------------------------+	PCF8574 Pins:
-			|		1 2 3 4 5 6 7 8 9	 |		I2C: VCC, Ground, SDA, SCL.
-			|                                   	 |	Pins:
-			| VCC				    VCC  |		1	P0	= SDIN
-			| GND				    GND	 |		2	P1	= SCLK	(PCD8544) / CKI (SK9822)
-			| SDA	    component side   	    SDA	 |		3	P2	= D/C
-			| SCL				    SCL	 |		4	P3	= RES
-			|					 |		5	P4	= SCE	(CS) Cable select Left  Nokia Display.
-			+----------------------------------------+		6	P5	= SCE	(CS) Cable select Right Nokia Display.
-										7	P6	= SDI	(SK9822)
-										8	P7	= AUX
-										9	INT = PCF8574 interupt.
+			+---------------------------------------+	PCF8574 Pins:
+			|	1 2 3 4 5 6 7 8 9					|		I2C: VCC, Ground, SDA, SCL.
+			|										|	Pins:
+			| VCC								VCC	|		1	P0	= SDIN
+			| GND								GND	|		2	P1	= SCLK	(PCD8544) / CKI (SK9822)
+			| SDA		Component Side			SDA	|		3	P2	= D/C
+			| SCL								SCL	|		4	P3	= RES
+			|										|		5	P4	= SCE	(CS) Cable select Left  Nokia Display.
+			+---------------------------------------+		6	P5	= SCE	(CS) Cable select Right Nokia Display.
+															7	P6	= SDI	(SK9822)
+															8	P7	= AUX
+															9	INT = PCF8574 interupt.
 	SK9822 Intelegent RGB LED:
 			+-----------------------+	SK9822 Pins:
-			|                       |		Vcc	=	5v Power.
-			| VCC		    GND |		CKO	=	Clock Out.	
-			| CKO   Top View    SCI	|		SDO	=	Data  Out.	
-			| SDO		    SDI	|		SDI	=	Data  In.	
-			|		        |		SCI	=	Clock In.	
+			|						|		Vcc	=	5v Power.
+			| VCC				GND	|		CKO	=	Clock Out.	
+			| CKO	Top View	SCI	|		SDO	=	Data  Out.	
+			| SDO				SDI	|		SDI	=	Data  In.	
+			|						|		SCI	=	Clock In.	
 			+-----------------------+		GND	=	Ground, Negative Power.	
 
 
