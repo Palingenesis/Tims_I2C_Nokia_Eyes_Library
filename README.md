@@ -1,13 +1,12 @@
 # Tims_I2C_Nokia_Eyes_Library
 An Arduino Library for controlling my TIM-01 Robot Eyes Module
-<img src="https://github.com/Palingenesis/Tims_I2C_Nokia_Eyes_Library/blob/main/Images/TIM-01_Eyes_Front_Github.png" alt="Front">
-
+![Front](../Images/TIM-01_Eyes_Front_Github.png)
 
 	The library is ported from:
 	Part of TIM-01 Robot Project.
 
 	It is for an eye module I have designed for my robot.
-	Details are here: [TIM-01 (Eyes)](https://robot-tim01.blogspot.com/2021/02/eyes.html)
+	Details are here: [TIM-01 (Eyes)](https://robot-tim01.blogspot.com/2021/02/eyes.html).
 	
 	By Tim Jackson
 	Use Freely, Just give me credit where due :)
@@ -22,9 +21,9 @@ An Arduino Library for controlling my TIM-01 Robot Eyes Module
 	To give backlighting to the eyes I am using two SK9822 Intelegent RGB LEDs.
 
 	My work is always, work in progress.
-	Details of my project here: [TIM-01](https://robot-tim01.blogspot.com/2020/04/robot-tim-01.html)
+	Details of my project here: [TIM-01](https://robot-tim01.blogspot.com/2020/04/robot-tim-01.html).
 	
-	More projects here: [Tim's Blog Place](https://timsblogplace.blogspot.com/2018/07/blog-post.html)
+	More projects here: [Tim's Blog Place](https://timsblogplace.blogspot.com/2018/07/blog-post.html).
 	
 
 	Nokia Display LPH7366: 84x48
