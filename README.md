@@ -2,11 +2,14 @@
 An Arduino Library for controlling my TIM-01 Robot Eyes Module
 <img src="https://github.com/Palingenesis/Tims_I2C_Nokia_Eyes_Library/blob/main/Images/TIM-01_Eyes_Front_Github.png" alt="Front">
 
+[1]: https://robot-tim01.blogspot.com/2021/02/eyes.html
+
 	The library is ported from:
 	Part of TIM-01 Robot Project.
 
 	It is for an eye module I have designed for my robot.
 	Details are here: <https://robot-tim01.blogspot.com/2021/02/eyes.html>
+    [TIM-01 Eyes][1]
 	
 	By Tim Jackson
 	Use Freely, Just give me credit where due :)
