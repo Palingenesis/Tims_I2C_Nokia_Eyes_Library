@@ -6,7 +6,7 @@ The library is ported from:
 Part of TIM-01 Robot Project.
 
 It is for an eye module I have designed for my robot.
-Details are here: [TIM-01](https://robot-tim01.blogspot.com/2021/02/eyes.html)
+Details are here: [TIM-01 (Eyes)](https://robot-tim01.blogspot.com/2021/02/eyes.html)
 
 
 By Tim Jackson
