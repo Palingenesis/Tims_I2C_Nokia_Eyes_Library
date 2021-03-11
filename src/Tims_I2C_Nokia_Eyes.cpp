@@ -227,29 +227,38 @@ void NokiaEyes::SK9822_EyeColour(uint8_t bl, uint8_t lb, uint8_t lg, uint8_t lr,
 /*
 	To PCD8544.
 
-	HEAD_EYES_SDIN_HI		B00000001
-	HEAD_EYES_SCLK_HI		B00000010
-	HEAD_EYES_DC_HI			B00000100
-	HEAD_EYES_RESET_HI		B00001000
-	HEAD_EYES_SCE_LEFT_HI	B11100000
-	HEAD_EYES_SCE_RIGHT_HI	B11010000
-	HEAD_EYES_SCE_BOTH_LOW	B00110000
+		#define HEAD_EYES_SCLK_HI		B00000001	//	PCF8574 pin		P0			Reads on HI.
+		#define HEAD_EYES_SDIN_HI		B00000010	//	PCF8574	pin		P1			HI = 1.
+		#define HEAD_EYES_DC_HI			B00000100	//	PCF8574 pin		P2			HI command mode.
+		#define HEAD_EYES_RESET_HI		B00001000	//	PCF8574 pin		P3			HI normal mode.
+		#define HEAD_EYES_SCE_LEFT_HI	B00010000	//	PCF8574 pin		P4			LOW Active.
+		#define HEAD_EYES_SCE_RIGHT_HI	B00100000	//	PCF8574 pin		P5			LOW Active.
+		#define SK9822_DATA_HI			B01000000	//	PCF8574 pin		P6			Used for SK9822 Data in. Inteligent LED.
+		#define AUX_HI					B10000000	//	PCF8574 pin		P7			Auxillary switch. HI = on.
+
+			SCLK    |   HEAD_EYES_SDIN_HI     | HEAD_EYES_DC_HI | HEAD_EYES_RESET_HI |    SCE    |    SCE    | SK9822_DATA_HI |    AUX_HI
+		 B00000001  |       B00000010         |    B00000100    |     B00001000      | B00010000 | B00100000 |   B01000000    |  B10000000
+	  switch 1 or 0 | Shift trough all 8 bits |    used or 0    |       always       |    use only 1 or 0    | not used here  | not used here
+
 
 	Send data to Nokia Display (PCD8544) via I2C (PCF8574).
 	shiftOut(SDIN_Pin, DCLK_Pin, MSBFIRST, data); This how I want to send through PCF8574.
 	(Which Eye, Is it Data or Command, Data sent).
 */
-void NokiaEyes::PCF8574_I2C_Write(uint8_t eye, byte data_or_command, uint8_t data) {
+void NokiaEyes::PCF8574_I2C_Write(uint8_t eye, uint8_t data_or_command, uint8_t data) {
 
 	Wire.beginTransmission(_PCF8574_I2C_Address);
-	Wire.write((HEAD_EYES_SDIN_HI, (data & 128) != 0) | (data_or_command << 2) | HEAD_EYES_RESET_HI | eye);
 
-	for (uint8_t i = 0; i < 8; i++) {
+	for (size_t i = 8; i > 0; i--) {
 
-		Wire.write((HEAD_EYES_SDIN_HI, (data & 128) != 0) | (data_or_command << 2) | HEAD_EYES_RESET_HI | eye);
-		Wire.write((HEAD_EYES_SDIN_HI, (data & 128) != 0) | (data_or_command << 2) | HEAD_EYES_RESET_HI | eye | HEAD_EYES_SCLK_HI);
-		data <<= 1;
+		bool dataBit = bitRead(data, i - 1);
+		uint8_t dataByte = 0;
+		bitWrite(dataByte, 1, dataBit);
+
+		Wire.write(HEAD_EYES_SCLK_LOW | dataByte | (data_or_command << 2) | HEAD_EYES_RESET_HI | eye);//Clock Off
+		Wire.write(HEAD_EYES_SCLK_HI | dataByte | (data_or_command << 2) | HEAD_EYES_RESET_HI | eye);//Clock On
 	}
+
 	_PCD8544_PinState = _PCD8544_PinState | HEAD_EYES_RESET_HI;
 	Wire.write(_PCD8544_PinState);
 	Wire.endTransmission();
@@ -283,20 +292,18 @@ void NokiaEyes::PCD8544_GoToXY(uint8_t eye, int x, int y) {
 */
 void NokiaEyes::PCD8544_Begin(uint8_t eye) {
 
-	//I2C Reset the LCD to a known state
 	Wire.beginTransmission(_PCF8574_I2C_Address);
-	Wire.write(0xFF);
-	Wire.write(HEAD_EYES_RESET_LOW);
-	Wire.write(HEAD_EYES_RESET_HI);
+	Wire.write(0xFF);					//	All on.
+	Wire.write(HEAD_EYES_RESET_LOW);	//	All off.
+	Wire.write(HEAD_EYES_RESET_HI);		//	Reset on.
 	Wire.endTransmission();
 
 	PCF8574_I2C_Write(eye, PCD8544_COMMAND, PCD8544_EXTENDED_INSTRUCTION);		//	Tell PCD8544 an extended command follows.
 	PCF8574_I2C_Write(eye, PCD8544_COMMAND, PCD8544_CONTRAST_DEFAULT);			//	Set LCD Vop (Contrast)
 	PCF8574_I2C_Write(eye, PCD8544_COMMAND, PCD8544_TEMPERATUR_COEFFICIENT_0);	//	Set Temp coefficent
 	PCF8574_I2C_Write(eye, PCD8544_COMMAND, PCD8544_SETBIAS_SYSTEM);			//	LCD bias mode 1:48 (try 0x13)
-	PCF8574_I2C_Write(eye, PCD8544_COMMAND, PCD8544_FUNCTION_SET);				//	We must send 0x20 before modifying the display control mode
+	PCF8574_I2C_Write(eye, PCD8544_COMMAND, PCD8544_NORMAL_INSTRUCTION);		//	Set Instruction Type.
 	PCF8574_I2C_Write(eye, PCD8544_COMMAND, PCD8544_NORMAL_MODE);				//	Set display control, normal mode.
-
 
 }
 /*
@@ -321,9 +328,10 @@ void NokiaEyes::PCD8544_UpdateDisplay(uint8_t eye, byte buffer[]) {
 */
 void NokiaEyes::PCD8544_ChangeContrast(uint8_t eye, byte contrast) {
 
+	if (contrast > 0x7f) { contrast = 0x7f; }
 	PCF8574_I2C_Write(eye, PCD8544_COMMAND, PCD8544_EXTENDED_INSTRUCTION);			//	Tell PCD8544 an extended command follows.
 	PCF8574_I2C_Write(eye, PCD8544_COMMAND, PCD8544_CONTRAST_ADDRESS | contrast);	//	Change PCD8544 Vop (Contrast).
-	PCF8574_I2C_Write(eye, PCD8544_COMMAND, PCD8544_FUNCTION_SET);					//	Change to display mode.
+	PCF8574_I2C_Write(eye, PCD8544_COMMAND, PCD8544_NORMAL_INSTRUCTION);			//	Set Instruction Type.
 }
 /*
 	To PCD8544.
@@ -333,10 +341,10 @@ void NokiaEyes::PCD8544_ChangeContrast(uint8_t eye, byte contrast) {
 */
 void NokiaEyes::PCD8544_InvertDisplay(uint8_t eye) {
 
-	PCF8574_I2C_Write(eye, PCD8544_COMMAND, PCD8544_EXTENDED_INSTRUCTION);					//	Tell PCD8544 an extended command follows.
+	PCF8574_I2C_Write(eye, PCD8544_COMMAND, PCD8544_EXTENDED_INSTRUCTION);						//	Tell PCD8544 an extended command follows.
 	if (_PCD8544_inverted) { PCF8574_I2C_Write(eye, PCD8544_COMMAND, PCD8544_NORMAL_MODE); }	//	Switch to Normal.
-	else { PCF8574_I2C_Write(eye, PCD8544_COMMAND, PCD8544_INVERTED); }						//	Switch to Inverted.
-	PCF8574_I2C_Write(eye, PCD8544_COMMAND, PCD8544_FUNCTION_SET);							//	Change to display mode.
+	else { PCF8574_I2C_Write(eye, PCD8544_COMMAND, PCD8544_INVERTED); }							//	Switch to Inverted.
+	PCF8574_I2C_Write(eye, PCD8544_COMMAND, PCD8544_NORMAL_INSTRUCTION);						//	Set Instruction Type.
 	_PCD8544_inverted = !_PCD8544_inverted;
 }
 /*

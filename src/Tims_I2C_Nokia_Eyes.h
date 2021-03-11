@@ -1,5 +1,5 @@
-
 /*
+
 	Tims_I2C_Nokia_Eyes v1.0.
 
 	This library is ported from:
@@ -46,13 +46,13 @@
 			+----------------------------------------+		PCF8574 Pins:
 			|		1 2 3 4 5 6 7 8 9				 |			 I2C: VCC, Ground, SDA, SCL.
 			|                                   	 |			Pins:
-			| VCC								VCC  |				1	P0	= SDIN
-			| GND								GND	 |				2	P1	= SCLK (PCD8544) / CKI (SK9822)
+			| VCC								VCC  |				1	P0	= SCLK (PCD8544) / CKI (SK9822)
+			| GND								GND	 |				2	P1	= SDIN
 			| SDA		component side			SDA	 |				3	P2	= D/C
 			| SCL								SCL	 |				4	P3	= RES
 			|										 |				5	P4	= SCE	(CS) Cable select Left  Nokia Display.
 			+----------------------------------------+				6	P5	= SCE	(CS) Cable select Right Nokia Display.
-																	7	P6	= SDI (SK9822)
+																	7	P6	= SDI	(SK9822)
 																	8	P7	= ?
 																	9	INT = PCF8574 interupt.
 
@@ -65,10 +65,11 @@
 			|						|			SCI	=	Clock In.
 			+-----------------------+			GND	=	Ground, Negative Power.
 
-	I2C Addresses used in my project:
+		I2C Addresses used in my project:
 		0x20	=	32	MCP23017 in Chasis.
 		0x21	=	33	MCP23017 in Torso.
-		0x22	=	34	PCF8574  in Head.
+		0x22	=	34	PCF8574  Eyes  in Head.
+		0x24	=	36	PCF8574  Mouth in Head.
 		0x04	=	4	Arduino controlling Dive (ATMega 328).
 		0x05	=	5	AtTiny controling Matrix (ATiny85).
 		0x06	=	6	Arduino controlling Arms (ATMega 168).
@@ -247,21 +248,22 @@ private:
 
 #define WHITE					0
 #define BLACK					1
-#define PCD8544_NORMAL_MODE		0x0C
-#define PCD8544_INVERTED		0x0D
-#define PCD8544_X_ADDRESS		0x80
-#define PCD8544_Y_ADDRESS		0x40
+#define PCD8544_NORMAL_MODE		0x0C	//	0000 1100
+#define PCD8544_INVERTED		0x0D	//	0000 1101
+#define PCD8544_X_ADDRESS		0x80	//	1000 0000
+#define PCD8544_Y_ADDRESS		0x40	//	0100 0000
 #define PCD8544_WIDTH			84
 #define PCD8544_HEIGHT			48
 #define BUFFER_SIZE				(PCD8544_WIDTH* PCD8544_HEIGHT / 8)
 
 
-#define PCD8544_TEMPERATUR_COEFFICIENT_0	0x04
-#define PCD8544_SETBIAS_SYSTEM				0x14
-#define PCD8544_FUNCTION_SET				0x20
-#define PCD8544_EXTENDED_INSTRUCTION		0x21
-#define PCD8544_CONTRAST_ADDRESS			0x80
-#define PCD8544_CONTRAST_DEFAULT			0xA6
+#define PCD8544_TEMPERATUR_COEFFICIENT_0	0x04	//	0000 0100
+#define PCD8544_SETBIAS_SYSTEM				0x14	//	0001 0100
+#define PCD8544_FUNCTION_SET				0x20	//	0010 0000
+#define PCD8544_NORMAL_INSTRUCTION			0x20	//	0010 0000
+#define PCD8544_EXTENDED_INSTRUCTION		0x21	//	0010 0001
+#define PCD8544_CONTRAST_ADDRESS			0x80	//	1000 0000
+#define PCD8544_CONTRAST_DEFAULT			0xA6	//	1010 0110
 
 	/*
 		PCD8544
@@ -281,19 +283,23 @@ private:
 		HEAD_EYES_SCE_BOTH_LOW	=	Both Eyes On.
 
 	*/
-#define HEAD_EYES_SDIN_HI		B00000001	//	PCF8574	pin		P0			HI = 1.
-#define HEAD_EYES_SCLK_HI		B00000010	//	PCF8574 pin		P1			Read on HI.
-#define HEAD_EYES_DC_HI			B00000100	//	PCF8574 pin		P2			HI command mode.
-#define HEAD_EYES_RESET_HI		B00001000	//	PCF8574 pin		P3			HI normal mode.
-#define HEAD_EYES_SCE_LEFT_HI	B00010000	//	PCF8574 pin		P4			LOW Active.
-#define HEAD_EYES_SCE_RIGHT_HI	B00100000	//	PCF8574 pin		P5			LOW Active.
-#define HEAD_EYES_SCE_BOTH_LOW	B00000000	//	PCF8574 pins	P4 and P5	LOW Active.
+#define HEAD_EYES_SCLK_HI		B00000001	//	PCF8574 pin		P0			Reads on HI.
+#define HEAD_EYES_SDIN_HI		B00000010	//	PCF8574	pin		P1			HI = 1.
+	//#define HEAD_EYES_DC_HI		B00000100	//	PCF8574 pin		P2			HI = Command mode.
+#define HEAD_EYES_RESET_HI		B00001000	//	PCF8574 pin		P3			HI = Normal State.
+#define HEAD_EYES_SCE_LEFT_HI	B00010000	//	PCF8574 pin		P4			HI = Left  Off (LOW Active).
+#define HEAD_EYES_SCE_RIGHT_HI	B00100000	//	PCF8574 pin		P5			HI = Right Off (LOW Active).
 #define SK9822_DATA_HI			B01000000	//	PCF8574 pin		P6			Used for SK9822 Data in. Inteligent LED.
-#define SK9822_DATA_LOW			B00000000	//	PCF8574 pin		P6			Used for SK9822 Data in. Inteligent LED.
 #define AUX_HI					B10000000	//	PCF8574 pin		P7			Auxillary switch. HI = on.
-#define AUX_LOW					B00000000	//	PCF8574 pin		P7			Auxillary switch. LOW = on.
 
-#define HEAD_EYES_RESET_LOW		B00000000	//	LOW to reset.
+//	All LOWs are ZERO
+#define HEAD_EYES_SCLK_LOW		B00000000
+#define HEAD_EYES_SDIN_LOW		B00000000	//	PCF8574	pin		P1			LOW = 0.
+//#define HEAD_EYES_DC_LOW		B00000000	//	PCF8574 pin		P2			LOW = Data mode.
+#define HEAD_EYES_RESET_LOW		B00000000
+#define HEAD_EYES_SCE_BOTH_LOW	B00000000	//	PCF8574 pin		P4			LOW = Both On (LOW Active).
+#define SK9822_DATA_LOW			B00000000
+#define AUX_LOW					B00000000
 
 #define Swap(a, b) { int8_t tp = a; a = b; b = tp; }	//	Swop two values for each other.
 

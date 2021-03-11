@@ -1,5 +1,6 @@
 
 /*
+* 1
 	Tims_I2C_Eyes_Library_Test.ino 02/02/2021
 
 	The library is ported from:
@@ -58,11 +59,11 @@
 	SK9822 Intelegent RGB LED:
 			+-----------------------+		SK9822 Pins:
 			|                       |			Vcc	=	5v Power.
-			| VCC				GND |			CKO	=	Clock Out.	
-			| CKO	Top View	SCI	|			SDO	=	Data  Out.	
-			| SDO				SDI	|			SDI	=	Data  In.	
-			|						|			SCI	=	Clock In.	
-			+-----------------------+			GND	=	Ground, Negative Power.	
+			| VCC				GND |			CKO	=	Clock Out.
+			| CKO	Top View	SCI	|			SDO	=	Data  Out.
+			| SDO				SDI	|			SDI	=	Data  In.
+			|						|			SCI	=	Clock In.
+			+-----------------------+			GND	=	Ground, Negative Power.
 
 
 
@@ -75,7 +76,6 @@ Sketch uses 14536 bytes (45%) of program storage space. Maximum is 32256 bytes.
 Global variables use 1478 bytes (72%) of dynamic memory, leaving 570 bytes for local variables. Maximum is 2048 bytes.
 
 */
-
 #include <Wire.h>
 #include <Tims_I2C_Nokia_Eyes.h>
 
@@ -92,7 +92,7 @@ static const byte Logo[] PROGMEM = {
 0x00, 0x00, 0x4A, 0xA2, 0xB4, 0x20, 0x00, 0x4F, 0x7F, 0x94, 0x00, 0x00, 0x04, 0xAA, 0xE9, 0x72, 0x80, 0xB1, 0xEF, 0xDF, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0C, 0x35, 0xFA, 0xF8, 0x00, 0x00, 0x00, 0x00, 0x31, 0x84, 0xA8, 0x40, 0x77, 0xBF, 0x00, 0x00, 0x00, 0x00, 0x04, 0xA4, 0x4A, 0x82, 0x02, 0x6E, 0x90, 0x00, 0x00, 0x00, 0x00, 0x42, 0x44, 0xB0, 0x10, 0x30, 0xBF, 0x00, 0x00,
 0x00, 0x00, 0x04, 0xA4, 0x4A, 0x83, 0xC3, 0x3F, 0xF0, 0x00, 0x00, 0x00, 0x00, 0x31, 0x93, 0x24, 0x32, 0x9C, 0xC1, 0x40, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x05, 0x06, 0xF9, 0x8A, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x4C, 0x36, 0x18, 0xA0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x06, 0x20, 0x10, 0x0E, 0x01, 0x86, 0x7F, 0x30, 0x18, 0x07, 0xE0, 0x73, 0x03, 0x10, 0xA0, 0x18, 0x67,
 0xF3, 0x01, 0x80, 0xFF, 0x01, 0x10, 0x30, 0xEA, 0x01, 0x86, 0x60, 0x30, 0x18, 0x0C, 0x30, 0x41, 0x22, 0xCF, 0xE0, 0x18, 0x66, 0x03, 0x01, 0x80, 0xC3, 0x06, 0x89, 0x24, 0x9C, 0x01, 0x86, 0x60, 0x30, 0x18, 0x0C, 0x30, 0x3C, 0x92, 0x45, 0xC0, 0x1F, 0xE7, 0xE3, 0x01, 0x80, 0xC3, 0x09, 0xD8, 0x15, 0x44, 0x01, 0xFE, 0x7E, 0x30, 0x18, 0x0C, 0x30, 0x43, 0x80, 0x74, 0x60, 0x18, 0x66, 0x03,
-0x01, 0x80, 0xC3, 0x00, 0xB8, 0x03, 0x07, 0x01, 0x86, 0x60, 0x30, 0x18, 0x0C, 0x30, 0x29, 0x00, 0x32, 0x10, 0x18, 0x66, 0x03, 0x01, 0x80, 0xC3, 0x00, 0x8C, 0x8F, 0x61, 0x01, 0x86, 0x60, 0x30, 0x18, 0x0C, 0x30, 0x00, 0xC4, 0xE4, 0x18, 0x18, 0x67, 0xF3, 0xF9, 0xFC, 0xFF, 0x08, 0x00, 0x30, 0x00, 0x81, 0x86, 0x7F, 0x3F, 0x9F, 0xC7, 0xE0 
+0x01, 0x80, 0xC3, 0x00, 0xB8, 0x03, 0x07, 0x01, 0x86, 0x60, 0x30, 0x18, 0x0C, 0x30, 0x29, 0x00, 0x32, 0x10, 0x18, 0x66, 0x03, 0x01, 0x80, 0xC3, 0x00, 0x8C, 0x8F, 0x61, 0x01, 0x86, 0x60, 0x30, 0x18, 0x0C, 0x30, 0x00, 0xC4, 0xE4, 0x18, 0x18, 0x67, 0xF3, 0xF9, 0xFC, 0xFF, 0x08, 0x00, 0x30, 0x00, 0x81, 0x86, 0x7F, 0x3F, 0x9F, 0xC7, 0xE0
 };
 byte glyph_5x8[] = {// A Smiley
   0x00, 0x14, 0x0F, 0xB8, 0x00
@@ -100,10 +100,11 @@ byte glyph_5x8[] = {// A Smiley
 
 bool PCD8544_inverted = false;
 unsigned long NextInterval1 = millis() + 1000;	//	Timing 1.
-unsigned long NextInterval2 = millis() + 1000;	//	Timing 2.
+unsigned long NextInterval2 = millis() + 2000;	//	Timing 2.
 unsigned long NextInterval3 = millis() + 500;	//	Timing 3.
 unsigned long Seconds = 0;	//	Counter.
 boolean Toggle1 = false;
+boolean Toggle2 = false;
 
 //	Coordinates.
 byte CurrentX = (PCD8544_WIDTH / 2) - 16;
@@ -124,18 +125,27 @@ void setup() {
 	Wire.begin();
 	Wire.setClock(400000);
 
-	NextInterval2 = millis() + 2000;
+	EyeControl.PCD8544_Begin(BOTH);
+	EyeControl.PCD8544_ChangeContrast(LEFT, 85);
+	EyeControl.PCD8544_ChangeContrast(RIGHT, 55);
+
+	StartUp();
+}
+void StartUp() {
+
 	EyeControl.SK9822_EyeColour(30, 255, 255, 255, 30, 255, 255, 255);
 
-	EyeControl.PCD8544_Begin(BOTH);
 	EyeControl.PCD8544_UpdateDisplay(LEFT, EyeControl.Buffer01);
 	EyeControl.PCD8544_UpdateDisplay(RIGHT, EyeControl.Buffer02);
 	delay(3000);
 	EyeControl.Buffer_FillScreen(EyeControl.Buffer01, WHITE); // Clear Screen
 	EyeControl.PCD8544_UpdateDisplay(BOTH, EyeControl.Buffer01);
-	EyeControl.PCD8544_ChangeContrast(BOTH, PCD8544_CONTRAST_DEFAULT);
 
 	randomSeed(analogRead(A0));	//	For Random generator, uses noise on pin to pick a start number.
+
+	TestPattern();
+	delay(1000);
+	EyeControl.Buffer_FillScreen(EyeControl.Buffer01, WHITE); // Clear Screen
 
 	CountDown();
 
@@ -146,7 +156,8 @@ void setup() {
 	EyeControl.Buffer_DrawSprite_F(EyeControl.Buffer01, Iris_32x30, CurrentX, CurrentY, 32, 30, BLACK, true);
 	EyeControl.PCD8544_UpdateDisplay(BOTH, EyeControl.Buffer01);
 
-	Rainbow();
+	//Rainbow();
+
 
 }
 void loop() {
@@ -160,6 +171,9 @@ void loop() {
 	if (millis() > NextInterval3) {
 		BGRW();
 		NextInterval3 = millis() + 3000;
+
+		//EyeControl.AUX(Toggle2);
+		//Toggle2 = !Toggle2;
 	}
 
 }
@@ -215,11 +229,11 @@ void TestI2C() {
 	Wire.beginTransmission(PCF8574_ADDRESS);
 	Wire.write(B01010101);
 	Wire.endTransmission();
-	delay(1000);
+	delay(2000);
 	Wire.beginTransmission(PCF8574_ADDRESS);
 	Wire.write(B10101010);
 	Wire.endTransmission();
-	delay(1000);
+	delay(2000);
 
 }
 /*
@@ -270,6 +284,77 @@ void TestText() {
 		Toggle1 = !Toggle1;
 	}
 	EyeControl.PCD8544_UpdateDisplay(BOTH, EyeControl.Buffer01);
+}
+/*
+	Display A Black and White squares.
+	To set contrast.
+	84x48
+	+------------------------------------------------------------------------------------+
+	|**********          **********                        **********          **********
+	|**********          **********                        **********          **********
+	|**********          **********                        **********          **********
+	|**********          **********                        **********          **********
+	|**********          **********                        **********          **********
+	|**********          **********                        **********          **********
+	|**********          **********                        **********          **********
+	|**********          **********                        **********          **********
+	|**********          **********                        **********          **********
+	|**********          **********                        **********          **********
+	|                              ************************
+	|                              ************************
+	|                              ************************
+	|                              ************************
+	|                              ************************
+	|                              ************************
+	|                              ************************
+	|                              ************************
+	|                              ************************
+	|                              ************************
+	|                              ************************
+	|                              ************************
+	|                              ************************
+	|                              ************************
+	|                              ************************
+	|                              ************************
+	|                              ************************
+	|                              ************************
+	|                              ************************
+	|                              ************************
+	|                              ************************
+	|                              ************************
+	|                              ************************
+	|                              ************************
+	|                              ************************
+	|**********          **********                        **********          **********
+	|**********          **********                        **********          **********
+	|**********          **********                        **********          **********
+	|**********          **********                        **********          **********
+	|**********          **********                        **********          **********
+	|**********          **********                        **********          **********
+	|**********          **********                        **********          **********
+	|**********          **********                        **********          **********
+	|**********          **********                        **********          **********
+	|**********          **********                        **********          **********
+	|          **********                                            **********
+	|          **********                                            **********
+	+------------------------------------------------------------------------------------+
+	*/
+void TestPattern() {
+
+	EyeControl.Buffer_FillScreen(EyeControl.Buffer01, WHITE); // Clear Screen
+	EyeControl.Buffer_DrawFilledRect(EyeControl.Buffer01, 0, 0, 10, 10, BLACK);
+	EyeControl.Buffer_DrawFilledRect(EyeControl.Buffer01, 20, 0, 10, 10, BLACK);
+	EyeControl.Buffer_DrawFilledRect(EyeControl.Buffer01, 54, 0, 10, 10, BLACK);
+	EyeControl.Buffer_DrawFilledRect(EyeControl.Buffer01, 74, 0, 10, 10, BLACK);
+	EyeControl.Buffer_DrawFilledRect(EyeControl.Buffer01, 30, 10, 24, 24, BLACK);
+	EyeControl.Buffer_DrawFilledRect(EyeControl.Buffer01, 0, 34, 10, 10, BLACK);
+	EyeControl.Buffer_DrawFilledRect(EyeControl.Buffer01, 20, 34, 10, 10, BLACK);
+	EyeControl.Buffer_DrawFilledRect(EyeControl.Buffer01, 54, 34, 10, 10, BLACK);
+	EyeControl.Buffer_DrawFilledRect(EyeControl.Buffer01, 74, 34, 10, 10, BLACK);
+	EyeControl.Buffer_DrawFilledRect(EyeControl.Buffer01, 10, 44, 10, 4, BLACK);
+	EyeControl.Buffer_DrawFilledRect(EyeControl.Buffer01, 64, 44, 10, 4, BLACK);
+	EyeControl.PCD8544_UpdateDisplay(BOTH, EyeControl.Buffer01);
+
 }
 /*
 	Test various Outputs.
@@ -521,7 +606,7 @@ void Test_RandomEyeColour() {
 */
 void TestEyeColours() {
 
-	Serial.println("TestEyeColours");
+	//Serial.println("TestEyeColours");
 	EyeControl.SK9822_EyeColour(20, Eye_Left_Red, Eye_Left_Green, Eye_Left_Blue, 20, Eye_Right_Red, Eye_Right_Green, Eye_Right_Blue);
 	delayMicroseconds(10);
 	Eye_Left_Red += 50;
